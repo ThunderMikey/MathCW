@@ -1,0 +1,19 @@
+function [TIn, VOut] = ralston(f, t0, tf, i0, h)
+    TIn = zeros(1,h+1); 
+    VOut = zeros(1,h+1); 
+ 
+    TIn(1) = t;
+    VOut(1) = i;
+    stepSize = (tf-t)/h;
+    
+    for j=1:h 
+        tNxt = t + (0.75*stepSize); 
+        k1 = feval(f, t, i);
+        iNxt = i + 0.75*stepSize*k1;
+        k2 = feval(f, tNxt, iNxt);
+        i = i + stepSize*(1/3*k1 + 2/3*k2);
+        TIn(j+1) = t; 
+        VOut(j+1) = i; 
+        t = t+stepSize;
+    end
+    
