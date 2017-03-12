@@ -1,3 +1,5 @@
-.fig
-.asv
-.log
+*.fig
+*.asv
+*.log
+*.toc
+*.aux
