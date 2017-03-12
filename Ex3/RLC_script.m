@@ -1,11 +1,9 @@
 vin_step = @(t) 5; %input for step signal
-vin_decay = @(t) 5 * exp(-((t^2)/(3*10^-6))); %input for impulsive signal with decay, exp function built in matlab
-vin_5square = @(t) 5 * square(2*pi*t*5); %input for square wave with 5 Hz , square function built in matlab
-vin_110square = @(t) 5 * square(2*pi*t*110); %input for square wave with 110 Hz
-vin_500square = @(t) 5 * square(2*pi*t*500); %input for square wave with 500 Hz
-vin_5sin = @(t) 5 * sin(2*pi*t*5); %input for sine wave with 5Hz, sine function built in matlab
-vin_110sin = @(t) 5 * sin(2*pi*t*110); %input for sine wave with 110Hz
-vin_500sin = @(t) 5 * sin(2*pi*t*500); %input for sine wave with 500Hz
+
+
+
+
+
 
 range = 0.2; %setting max of range
 h = 0.0001; % setting step size
@@ -13,24 +11,7 @@ h = 0.0001; % setting step size
 N = range / h; %setting size of array
 
 out_step = zeros(N, 2); %set up arrays
-out_decay = zeros(N, 2); %set up arrays
-out_5square = zeros(N, 2); %set up arrays
-out_110square = zeros(N, 2); %set up arrays
-out_500square = zeros(N, 2); %set up arrays
-out_5sin = zeros(N, 2); %set up arrays
-out_110sin = zeros(N, 2); %set up arrays
-out_500sin = zeros(N, 2); %set up arrays
-
 out_step(1,:) = [500*10^-9 0]; %initialising arrays 
-out_decay(1,:) = [500*10^-9 0]; %initialising arrays 
-out_5square(1,:) = [500*10^-9 0]; %initialising arrays 
-out_110square(1,:) = [500*10^-9 0]; %initialising arrays 
-out_500square(1,:) = [500*10^-9 0]; %initialising arrays 
-out_5sin(1,:) = [500*10^-9 0]; %initialising arrays 
-out_110sin(1,:) = [500*10^-9 0]; %initialising arrays 
-out_500sin(1,:) = [500*10^-9 0]; %initialising arrays 
-
-
 
 R = 280; %setting given value of resistance
 C = 4*10^-6; %setting given value of capacitance
@@ -66,6 +47,10 @@ lgd.FontSize = 12;
 lgd.FontWeight = 'bold';
 legend('boxoff');
 
+vin_decay = @(t) 5 * exp(-((t^2)/(3*10^-6))); %input for impulsive signal with decay, exp function built in matlab
+out_decay = zeros(N, 2); %set up arrays
+out_decay(1,:) = [500*10^-9 0]; %initialising arrays 
+
 vin = vin_decay; %setting vin for impulsive signal test
 
 
@@ -94,7 +79,9 @@ lgd.FontSize = 12;
 lgd.FontWeight = 'bold';
 legend('boxoff');
  
-
+vin_5square = @(t) 5 * square(2*pi*t*5); %input for square wave with 5 Hz , square function built in matlab
+out_5square = zeros(N, 2); %set up arrays
+out_5square(1,:) = [500*10^-9 0]; %initialising arrays 
 
 vin = vin_5square; %setting vin for square signal test
 
@@ -122,6 +109,11 @@ lgd = legend('Output Voltage', 'Square Wave');
 lgd.FontSize = 12;
 lgd.FontWeight = 'bold';
 legend('boxoff');
+
+vin_110square = @(t) 5 * square(2*pi*t*110); %input for square wave with 110 Hz
+out_110square = zeros(N, 2); %set up arrays
+out_110square(1,:) = [500*10^-9 0]; %initialising arrays 
+
 
 vin = vin_110square;  %setting vin for square signal test
 
@@ -152,6 +144,9 @@ lgd.FontSize = 12;
 lgd.FontWeight = 'bold';
 legend('boxoff');
 
+vin_500square = @(t) 5 * square(2*pi*t*500); %input for square wave with 500 Hz
+out_500square = zeros(N, 2); %set up arrays
+out_500square(1,:) = [500*10^-9 0]; %initialising arrays 
 
 vin = vin_500square;  %setting vin for square signal test
 
@@ -181,6 +176,11 @@ lgd.FontSize = 12;
 lgd.FontWeight = 'bold';
 legend('boxoff');
 
+vin_5sin = @(t) 5 * sin(2*pi*t*5); %input for sine wave with 5Hz, sine function built in matlab
+out_5sin = zeros(N, 2); %set up arrays
+out_5sin(1,:) = [500*10^-9 0]; %initialising arrays 
+
+
 vin = vin_5sin;  %setting vin for sine wave test
 
 %coupled equations
@@ -209,6 +209,10 @@ lgd.FontSize = 12;
 lgd.FontWeight = 'bold';
 legend('boxoff');
 
+vin_110sin = @(t) 5 * sin(2*pi*t*110); %input for sine wave with 110Hz
+out_110sin = zeros(N, 2); %set up arrays
+out_110sin(1,:) = [500*10^-9 0]; %initialising arrays 
+
 
 vin = vin_110sin; %setting vin for sine wave test
 
@@ -236,6 +240,11 @@ lgd = legend('Output Voltage', 'Sine Wave');
 lgd.FontSize = 12;
 lgd.FontWeight = 'bold';
 legend('boxoff');
+
+vin_500sin = @(t) 5 * sin(2*pi*t*500); %input for sine wave with 500Hz
+out_500sin = zeros(N, 2); %set up arrays
+out_500sin(1,:) = [500*10^-9 0]; %initialising arrays 
+
 
 vin = vin_500sin; %setting vin for sine wave test
 
