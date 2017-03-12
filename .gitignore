@@ -1,0 +1,6 @@
+*.fig
+*.asv
+*.log
+*.toc
+*.aux
+.DS_Store
