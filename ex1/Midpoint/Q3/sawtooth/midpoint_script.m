@@ -1,34 +1,32 @@
-
-%function heun_script(period)
 close all
 clc
 
-period = 0.0001000;
+period = 0.0000020;
 t0=0; % t start
 tfinal=4*period; %t final
 i0=0;
-steps=100; %number of steps
+step=100; %number of steps
 R=0.5; %R = 0.5 OhmRF
 L=0.0015; %I = 1.5mH
 
-Vin = @(t) 4*sawtooth((t*2*pi)/period); %Input voltage function
-    f = @(t,i) (Vin(t)-R*(i))/L; %Function input for difference method
-    [T,IOut] = midpoint(f, t0, tfinal, i0, steps); 
+Vin = @(t) 4*sawtooth((t*2*pi)/period); %sawtooth signal
+    f = @(t,i) (Vin(t)-R*(i))/L;  %Function in the question
+    [T,IOut] = midpoint(f, t0, tfinal, i0, step); %function call
 
-Vout = zeros(1, steps+1); 
-    for j=1:steps
-        Vout(j) = Vin(T(j)) - R*IOut(j); %Create Vout array from Iout, R and Vin
+Vout = zeros(1, step+1); %initialise Vout
+    for j=1:step
+        Vout(j) = Vin(T(j)) - R*IOut(j);  %Use iteration to get Vout
     end
     
-figure %plot graphs
-plot(T, Vout , 'r');
+figure %start to plot the graph
+plot(T, Vout , 'r');%plot time T vs Vout in red colour
 hold on;
-plot(T, Vin(T), 'c');
-plot(T, IOut, 'b');
+plot(T, Vin(T), 'c');%plot time T vs Vout in cyan colour
+plot(T, IOut, 'b');%plot time T vs Vout in blue colour
     
-legend('Vout(V)', 'Vin(V)', 'IOut(A)') %label
-title('Heun Sawtooth Period = 1000us')%set title
-xlabel('Time /s')%set y,x-axis
+legend('Vout(V)', 'Vin(V)', 'IOut(A)') %label the graph
+title('Midpoint Sawtooth Period = 20us')%set the title
+xlabel('Time /s')%set x,y-axis and unit
 ylabel('Amp')
 
     

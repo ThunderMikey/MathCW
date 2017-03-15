@@ -1,9 +1,4 @@
-vin_step = @(t) 5; %input for step signal
-
-
-
-
-
+vin_step = @(t) 5 * heaviside(t); %input for step signal
 
 range = 0.2; %setting max of range
 h = 0.0001; % setting step size
@@ -19,7 +14,7 @@ L = 0.6; %setting given value of inductance
 vin = vin_step; %setting vin for first test
 
 %coupled equations
-funcq = @(y) y; 
+funcq = @(t,x, y) y; 
 funcqp = @(t,y,yp) (vin(t)-R*yp-y/C)/L;
 
 t = 0: h: range - h; %going from t = 0 to just 1 step below the range
@@ -30,11 +25,13 @@ for i = 2: N %starting from 2 as values at 1 already initialised, matlab starts 
     [out_step(i,1), out_step(i, 2)] = RK4second(t(i), out_step(i-1,1), out_step(i-1, 2), funcq, funcqp, h); 
 end
 
+out_step(:,2) = out_step(:,2) *R;
+
 
 % producing the figure for the step signal test
 
 figure;
-plot(t, (R*out_step(:,2)), '-ok');
+plot(t, out_step(:,2), '-ok');
 hold on;
 fplot(vin_step, [0 range], '-or');
 hold off;
@@ -55,7 +52,7 @@ vin = vin_decay; %setting vin for impulsive signal test
 
 
 %coupled equations
-funcqdecay = @(y) y;
+funcqdecay = @(t, x, y) y;
 funcqpdecay = @(t,y,yp) (vin(t)-R*yp-y/C)/L;
 for i = 2: N
   
@@ -63,10 +60,12 @@ for i = 2: N
 
 end
 
+out_decay(:,2) = out_decay(:,2) * R;
+
 % producing the figure for the impulsive signal test
 
 figure;
-plot(t, (R*out_decay(:,2)), '-ok');
+plot(t, out_decay(:,2), '-ok');
 hold on;
 fplot(vin_decay, [0 range], '-or');
 hold off
@@ -86,7 +85,7 @@ out_5square(1,:) = [500*10^-9 0]; %initialising arrays
 vin = vin_5square; %setting vin for square signal test
 
 %coupled equations
-funcq5square = @(y) y;
+funcq5square = @(t, x, y) y;
 funcqp5square = @(t,y,yp) (vin(t)-R*yp-y/C)/L;
 for i = 2: N
   
@@ -94,10 +93,12 @@ for i = 2: N
 
 end
 
+out_5square(:,2) = out_5square(:,2) * R;
+
 % producing the figure for the square signal test(5Hz)
 
 figure;
-plot(t, (R*out_5square(:,2)), '-ok');
+plot(t, out_5square(:,2), '-ok');
 hold on;
 fplot(vin_5square, [0 range], '-or');
 hold off;
@@ -118,7 +119,7 @@ out_110square(1,:) = [500*10^-9 0]; %initialising arrays
 vin = vin_110square;  %setting vin for square signal test
 
 %coupled equations
-funcq110square = @(y) y;
+funcq110square = @(t, x, y) y;
 funcqp110square = @(t,y,yp) (vin(t)-R*yp-y/C)/L;
 for i = 2: N
   
@@ -126,12 +127,12 @@ for i = 2: N
 
 end
 
-
+out_110square(:,2) = out_110square(:,2) * R;
 
 % producing the figure for the square signal test(110 Hz)
 
 figure;
-plot(t, (R*out_110square(:,2)), '-ok');
+plot(t, out_110square(:,2), '-ok');
 hold on;
 fplot(vin_110square, [0 range], '-or');
 hold off;
@@ -151,7 +152,7 @@ out_500square(1,:) = [500*10^-9 0]; %initialising arrays
 vin = vin_500square;  %setting vin for square signal test
 
 %coupled equations
-funcq1 = @(y) y;
+funcq1 = @(t, x, y) y;
 funcqp1 = @(t,y,yp) (vin(t)-R*yp-y/C)/L;
 for i = 2: N
   
@@ -159,11 +160,13 @@ for i = 2: N
 
 end
 
+out_500square(:,2) = out_500square(:,2) * R;
+
 
 % producing the figure for the square signal test(500Hz)
 
 figure;
-plot(t, (R*out_500square(:,2)), '-ok');
+plot(t, out_500square(:,2), '-ok');
 hold on;
 fplot(vin_500square, [0 range], '-or');
 hold off;
@@ -184,7 +187,7 @@ out_5sin(1,:) = [500*10^-9 0]; %initialising arrays
 vin = vin_5sin;  %setting vin for sine wave test
 
 %coupled equations
-funcq5sin = @(y) y;
+funcq5sin = @(t, x, y) y;
 funcqp5sin = @(t,y,yp) (vin(t)-R*yp-y/C)/L;
 for i = 2: N
   
@@ -192,11 +195,12 @@ for i = 2: N
 
 end
 
+out_5sin(:,2) = out_5sin(:,2) * R;
 
 % producing the figure for the sine wave test(5Hz)
 
 figure;
-plot(t, (R*out_5sin(:,2)), '-ok');
+plot(t, out_5sin(:,2), '-ok');
 hold on;
 fplot(vin_5sin, [0 range], '-or');
 hold off;
@@ -217,7 +221,7 @@ out_110sin(1,:) = [500*10^-9 0]; %initialising arrays
 vin = vin_110sin; %setting vin for sine wave test
 
 %coupled equations
-funcq110sin = @(y) y;
+funcq110sin = @(t, x, y) y;
 funcqp110sin = @(t,y,yp) (vin(t)-R*yp-y/C)/L;
 for i = 2: N
   
@@ -225,10 +229,12 @@ for i = 2: N
 
 end
 
+out_110sin(:,2) = out_110sin(:,2) * R;
+
 % producing the figure for the sine wave test(110Hz)
 
 figure;
-plot(t, (R*out_110sin(:,2)), '-ok');
+plot(t, out_110sin(:,2), '-ok');
 hold on;
 fplot(vin_110sin, [0 range], '-or');
 hold off;
@@ -249,7 +255,7 @@ out_500sin(1,:) = [500*10^-9 0]; %initialising arrays
 vin = vin_500sin; %setting vin for sine wave test
 
 %coupled equations
-funcq500sin = @(y) y;
+funcq500sin = @(t, x, y) y;
 funcqp500sin = @(t,y,yp) (vin(t)-R*yp-y/C)/L;
 for i = 2: N
   
@@ -257,10 +263,12 @@ for i = 2: N
 
 end
 
+out_500sin(:,2) = out_500sin(:,2) * R;
+
 % producing the figure for the sine wave test(500Hz)
 
 figure;
-plot(t, (R*out_500sin(:,2)), '-ok');
+plot(t, out_500sin(:,2), '-ok');
 hold on;
 fplot(vin_500sin, [0 range], '-or');
 hold off;

@@ -1,13 +1,14 @@
-function [T,IOut] = heun(f, t0, tfinal, y, steps)
-h = (tfinal - t0)/steps;
-T = zeros(1,steps+1);
-IOut = zeros(1,steps+1);
-T(1) = t0;
+function [T,IOut] = heun(f, t0, tfinal, y, step)
+h = (tfinal - t0)/step;%use step to obtain step size
+T = zeros(1,step+1);%initialise T and IOut
+IOut = zeros(1,step+1);
+T(1) = t0;%assign the initial value to T(1) and IOut(1)
 IOut(1) = y;
-for j=1:steps
-  INext  = IOut(j) + h*feval(f,T(j),IOut(j));
-  T(j+1) = T(j) + h;
-  IOut(j+1) = IOut(j) + 0.5*h*(feval(f,T(j),IOut(j)) + feval(f,T(j+1),INext));
+for i=1:step
+  INext  = IOut(i) + h*feval(f,T(i),IOut(i));%calculate value of the next I
+  T(i+1) = T(i) + h;%calculcate the value of the next T
+  IOut(i+1) = IOut(i) + 0.5*h*(feval(f,T(i),IOut(i)) + feval(f,T(i+1),INext));
+  %use Heun Method-> y(j+1)=y(i)+1/2(h(f(x,y)+f(x+1,y+1)))
  
   
 end

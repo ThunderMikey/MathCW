@@ -1,4 +1,4 @@
-function [T,IOut] = midpoint(f, t0, tfinal, y, steps)
+function [T,IOut] = Midpoint(f, t0, tfinal, y, steps)
 h = (tfinal - t0)/steps;
 half_h = h/2;
 T = zeros(1,steps+1);

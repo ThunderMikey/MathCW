@@ -4,17 +4,17 @@ clc
 t0=0; % t start
 tfinal=1; %t final
 i0=0;
-steps=100000; %number of steps
+step=1000; %number of steps
 R=0.5; %R = 0.5 Ohm
 L=0.0015; %I = 1.5mH
 
 Vin = @(t) 5.5*heaviside(t); %step signal
     f = @(t,i) (Vin(t)-R*(i))/L; %Function in
-    [T,IOut] = ralston(f, t0, tfinal, i0, steps); %function call
+    [T,IOut] = ralston(f, t0, tfinal, i0, step); %function call
 
-Vout = zeros(1, steps+1); 
-    for j=1:steps
-        Vout(j) = Vin(T(j)) - R*IOut(j); %Create Vout array from Iout, R and Vin
+Vout = zeros(1, step+1); 
+    for j=1:step
+        Vout(j) = Vin(T(j)) - R*IOut(j); %use iteration to get Vout from the equation
     end
     
 figure %plot graphs
