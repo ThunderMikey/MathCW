@@ -9,13 +9,13 @@ R=0.5; %R = 0.5 Ohm
 L=0.0015; %I = 1.5mH
 
 Vin = @(t) 5.5*heaviside(t); %step signal
-    f = @(t,i) (Vin(t)-R*(i))/L; %Function in the question
-    [T,IOut] = heun(f, t0, tf, i0, step); %function call
+f = @(t,i) (Vin(t)-R*(i))/L; %Function in the question
+[T,IOut] = heun(f, t0, tf, i0, step); %function call
 
 Vout = zeros(1, step+1); %initialise Vout = 0
-    for j=1:step
-        Vout(j) = Vin(T(j)) - R*IOut(j); %Use iteration to get Vout
-    end
+  for j=1:step
+      Vout(j) = Vin(T(j)) - R*IOut(j); %Use iteration to get Vout
+  end
     
 figure %start to plot the graph
 plot(T, Vout , 'r');%plot time T vs Vout in red colour

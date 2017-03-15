@@ -9,8 +9,8 @@ R=0.5; %R = 0.5 Ohm
 L=0.0015; %I = 1.5mH
 
 Vin = @(t) 5.5*heaviside(t); %step signal
-    f = @(t,i) (Vin(t)-R*(i))/L; %Function in
-    [T,IOut] = ralston(f, t0, tfinal, i0, step); %function call
+f = @(t,i) (Vin(t)-R*(i))/L; %Function in
+[T,IOut] = ralston(f, t0, tfinal, i0, step); %function call
 
 Vout = zeros(1, step+1); %initialise the vout
     for j=1:step

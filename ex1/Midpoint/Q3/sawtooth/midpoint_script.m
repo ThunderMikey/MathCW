@@ -1,7 +1,7 @@
 close all
 clc
 
-period = 0.0001000;
+period = 0.0000020;
 t0=0; % t start
 tfinal=4*period; %t final
 i0=0;
@@ -25,7 +25,7 @@ plot(T, Vin(T), 'c');%plot time T vs Vout in cyan colour
 plot(T, IOut, 'b');%plot time T vs Vout in blue colour
     
 legend('Vout(V)', 'Vin(V)', 'IOut(A)') %label the graph
-title('Heun Sawtooth Period = 1000us')%set the title
+title('Midpoint Sawtooth Period = 20us')%set the title
 xlabel('Time /s')%set x,y-axis and unit
 ylabel('Amp')
 

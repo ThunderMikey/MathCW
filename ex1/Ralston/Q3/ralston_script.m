@@ -1,19 +1,18 @@
 
-%function heun_script(period)
 close all
 clc
 
-period = 0.0001000;
+period = 0.001000;
 t0=0; % t start
 tfinal=4*period; %t final
 i0=0;
 steps=100; %number of steps
-R=0.5; %R = 0.5 OhmRF
+R=0.5; %R = 0.5 Ohm
 L=0.0015; %I = 1.5mH
 
 Vin = @(t) 4*square((t*2*pi)/period); %Input voltage function
     f = @(t,i) (Vin(t)-R*(i))/L; %Function input for difference method
-    [T,IOut] = ralston_sqr(f, t0, tfinal, i0, steps); 
+    [T,IOut] = ralston(f, t0, tfinal, i0, steps); 
 
 Vout = zeros(1, steps+1); 
     for j=1:steps
