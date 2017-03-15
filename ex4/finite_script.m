@@ -4,7 +4,7 @@
 k: time interval
 iterations: iterations in time
 h: spatial interval
-x0, xf: boundary conditions
+x0, xf: spatial range
 init: function handle to initial condition
 bcl: function handle to left boundary condition 
 bcr: function handle to right boundary condition 
