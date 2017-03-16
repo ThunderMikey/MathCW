@@ -1,8 +1,5 @@
-
 %function heun_script(period)
-close all
 clc
-
 period = 0.00015;
 t0=0; % t start
 tfinal=4*period; %t final
@@ -32,7 +29,7 @@ legend('ErrorHeun', 'ErrorMidpoint', 'ErrorRalston') %label
 title('Error Functions')%set title
 xlabel('Time /s')%set y,x-axis
 ylabel('Current/Amp')
-
+%---------error analysis for Heun 
 figure
 loglog(THeun, abs(ErrorHeun), 'b');
 hold on;
@@ -48,7 +45,7 @@ legend('h=100', 'h=500', 'h=1000')
 title('loglog ErrorHeun')
 xlabel('log(Time/s)')
 ylabel('|log(Current/Amp)|')
-
+%---------error analysis for Midpoint 
 figure
 loglog(TMidpoint, abs(ErrorMidpoint), 'b');
 hold on;
@@ -64,7 +61,7 @@ legend('h=100', 'h=500', 'h=1000')
 title('loglog ErrorMidpoint')
 xlabel('log(Time/s)')
 ylabel('|log(Current/Amp)|')
-
+%---------error analysis for Ralston
 figure
 loglog(TRalston, abs(ErrorRalston), 'b');
 hold on;
